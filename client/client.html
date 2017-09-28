@@ -7,6 +7,115 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.34/browser.min.js"></script>
   <script type="text/babel">
 
+    const handleResponse = (xhr, parseResponse) => {
+      const content = document.querySelector('#content');
+      
+      //print etag number
+      console.log(xhr.getResponseHeader ('etag'));
+      
+      //show true status code
+      console.log(xhr.status);
+
+      switch(xhr.status){
+        case 200:
+          content.innerHTML = '<b>Success</b>';
+          break;
+        case 201:
+          content.innerHTML = '<b>Created</b>';
+          break;
+        case 204:
+          content.innerHTML = '<b>Updated</b>';
+          parseResponse = false;
+          break;
+        case 304:
+          content.innerHTML = '<b>Not Modified</b>';
+          parseResponse = false;
+          break;
+        case 400:
+          content.innerHTML = '<b>Bad request</b>';
+          break;
+        case 404:
+          content.innerHTML = `<b>Resource Not Found</b>`;
+          break;
+        default:
+          content.innerHTML = '<b>Error code not implemented</b>';
+          break;
+      }
+      
+      console.dir(xhr.responseText);
+      
+      if(parseResponse){
+        const obj = JSON.parse(xhr.response);
+        console.dir(obj);
+        if(obj.message != undefined) content.innerHTML += `<br><b> ${obj.message}</b>`;
+      } else {
+        console.log('recieved');
+      }
+    };
+
+    const requestUpdate = (e, userForm) => {
+      const url = userForm.querySelector('#urlField').value;
+      //get method selected
+      const method = userForm.querySelector('#methodSelect').value;
+      
+      const xhr = new XMLHttpRequest();
+      xhr.open(method, url);
+
+      xhr.setRequestHeader('Accept', 'application/json');
+
+      //if get request or head request
+      if(xhr.status == 304 || xhr.status == 204) {
+        xhr.onload = () => handleResponse(xhr, false);
+        //console.log('supposed to work');
+      } else if(method == 'get' || method === 'post') {
+        //set onload to parse request and get json message
+        xhr.onload = () => handleResponse(xhr, true);
+      } else {
+        //set onload to check meta data and NOT message
+        xhr.onload = () => handleResponse(xhr, false);
+      }
+      
+      xhr.send();
+      
+      e.preventDefault();
+      return false;
+    };
+
+    const sendPost = (e, nameForm) => {
+      const nameAction = nameForm.getAttribute('action');
+      const nameMethod = nameForm.getAttribute('method');
+      const nameField = nameForm.querySelector('#nameField');
+      const ageField = nameForm.querySelector('#ageField');
+      
+      const xhr = new XMLHttpRequest();
+      xhr.open(nameMethod, nameAction);
+      xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded'); //same action form would send
+      xhr.setRequestHeader('Accept','application/json');
+      
+      //console.log('send:'+xhr.status+', head: '+ nameMethod);
+      xhr.onload = () => handleResponse(xhr, true);
+      
+      const formData = `name=${nameField.value}&age=${ageField.value}`;
+      
+      xhr.send(formData); //send back the data
+      
+      e.preventDefault(); //prevent browser from sending form
+      return false; //dont change page
+    };
+
+    const init = () => {
+      //input and make/update user
+      const nameForm = document.querySelector('#nameForm');
+      const addUser = (e) => sendPost(e, nameForm);
+      nameForm.addEventListener('submit', addUser);
+      
+      //get users
+      const userForm = document.querySelector('#userForm');
+      const getUsers = (e) => requestUpdate(e, userForm);
+      userForm.addEventListener('submit', getUsers);
+    };
+
+    window.onload = init;
   </script>
 </head>
 <body>
