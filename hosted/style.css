@@ -1,0 +1,95 @@
+html, body {
+  width: 100%;
+  height:100%;
+  padding: 0;
+  margin:0;
+  background-color: #d3ffdb;
+  font-family:"Trebuchet MS", Helvetica, sans-serif;
+  //font-family: 'Nunito', sans-serif;
+}
+
+h1 {
+  font-size: 2em;
+  font-weight: bold;
+  color:#83ff9a;
+  text-align: center;
+}
+
+h2 {
+	font-weight: bold;
+	text-decoration: underline;
+}
+
+p{
+  margin: 0 auto;
+  width: 85%;
+  color: #555555;
+}
+
+ul {
+  text-align: left;
+}
+
+li {
+  width: 85%;
+  list-style: disc;
+  font-size: 1em;
+  font-weight: bold;
+  color: #555555;
+  margin-bottom: 10px;
+  margin-left: 50px;
+}
+
+a {
+	color: #088da5;
+	text-decoration: none;
+}
+
+a:visited {
+	color: #999999;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+input {
+  margin-bottom: 1.3em;
+  margin-right: 1.3em;
+}
+
+#wrapper{
+  width: 85%;
+  margin: 0 auto;
+  padding-top: 1em;
+  max-width: 800px;
+  min-width: 600px;
+  background-color: #ffffff;
+  padding: 2em;
+  border-bottom-left-radius: 7px;
+  border-bottom-right-radius: 7px;
+  color: #333333;	
+  //border-left: 1px solid gray;
+  //border-right: 1px solid gray;
+  display: block;
+}
+
+#top {
+  text-align: center;
+  margin: 0 auto;
+}
+
+#top h1 {
+  font-size: 2em;
+}
+
+#content {
+}
+
+.slot {
+  padding: 15px;
+  padding-bottom: 5px;
+  border: 1px solid #c3c3c3;
+  border-radius: 7px;
+  background-color: #ddffe3;
+}

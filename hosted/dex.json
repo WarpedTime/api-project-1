@@ -1,0 +1,38 @@
+[
+  {
+    "name": "bulbasaur",
+    "id": "001",
+    "stats": {
+      "atk": "49",
+      "def": "49",
+      "hp": "45",
+      "spAtk": "65",
+      "spDef": "65",
+      "spd": "45"
+    }
+  },
+  {
+    "name": "ivysaur",
+    "id": "002",
+    "stats": {
+      "atk": "62",
+      "def": "63",
+      "hp": "60",
+      "spAtk": "80",
+      "spDef": "80",
+      "spd": "60"
+    }
+  },
+  {
+    "name": "venusaur",
+    "id": "003",
+    "stats": {
+      "atk": "82",
+      "def": "83",
+      "hp": "80",
+      "spAtk": "100",
+      "spDef": "100",
+      "spd": "80"
+    }
+  }
+]

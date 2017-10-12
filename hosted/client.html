@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>API proto</title>
+  <link rel="stylesheet" type="text/css" href="/style.css">
+  <script src="bundle.js"></script>
+</head>
+<body>
+  <section id="wrapper">
+    
+    <h1>API prototype</h1>
+    
+    <hr>
+    
+    <section id="createTeam">
+      
+      <section id="content">[ ... ]</section>
+      
+      <h1>[current team] </h1>
+      <p>*for now if no team name just overwrites '' team</p>
+      <p>*for now need at least a pokemon name and move entered in first slot to validate</p>
+      <form id="teamForm" action="/addTeam" method="post">
+        
+        <label for="teamName"><h3>Team name: </h3></label>
+        <input id="teamNameField" type="text" name="teamName" />
+        
+        <h3>Slot 1</h3>
+        <div class="slot">
+          <label for="pkmn1">Name: </label>
+          <input id="pkmn1Field" type="text" name="pkmn1"/>         
+          <br>
+          <label for="move1_1">Move 1: </label>
+          <input id="move1_1Field" type="text" name="move1_1"/>           
+          <label for="move1_2">Move 2: </label>
+          <input id="move1_2Field" type="text" name="move1_2"/>     <br>  
+          <label for="move1_3">Move 3: </label>
+          <input id="move1_3Field" type="text" name="move1_3"/>           
+          <label for="move1_4">Move 4: </label>
+          <input id="move1_4Field" type="text" name="move1_4"/>  
+        </div>
+        
+        <h3>Slot 2</h3>
+        <div class="slot">
+          <label for="pkmn2">Name: </label>
+          <input id="pkmn2Field" type="text" name="pkmn2"/>         
+          <br>
+          <label for="move2_1">Move 1: </label>
+          <input id="move2_1Field" type="text" name="move2_1"/>           
+          <label for="move2_2">Move 2: </label>
+          <input id="move2_2Field" type="text" name="move2_2"/>     <br>  
+          <label for="move2_3">Move 3: </label>
+          <input id="move2_3Field" type="text" name="move2_3"/>           
+          <label for="move2_4">Move 4: </label>
+          <input id="move2_4Field" type="text" name="move2_4"/>  
+        </div>
+        
+        <h3>Slot 3</h3>
+        <div class="slot">
+          <label for="pkmn3">Name: </label>
+          <input id="pkmn3Field" type="text" name="pkmn3"/>         
+          <br>
+          <label for="move3_1">Move 1: </label>
+          <input id="move3_1Field" type="text" name="move3_1"/>           
+          <label for="move3_2">Move 2: </label>
+          <input id="move3_2Field" type="text" name="move3_2"/>     <br>  
+          <label for="move3_3">Move 3: </label>
+          <input id="move3_3Field" type="text" name="move3_3"/>           
+          <label for="move3_4">Move 4: </label>
+          <input id="move3_4Field" type="text" name="move3_4"/>  
+        </div>
+        
+        <h3>Slot 4</h3>
+        <div class="slot">
+          <label for="pkmn4">Name: </label>
+          <input id="pkmn4Field" type="text" name="pkmn4"/>         
+          <br>
+          <label for="move4_1">Move 1: </label>
+          <input id="move4_1Field" type="text" name="move4_1"/>           
+          <label for="move4_2">Move 2: </label>
+          <input id="move4_2Field" type="text" name="move4_2"/>     <br>  
+          <label for="move4_3">Move 3: </label>
+          <input id="move4_3Field" type="text" name="move4_3"/>           
+          <label for="move4_4">Move 4: </label>
+          <input id="move4_4Field" type="text" name="move4_4"/>  
+        </div>
+        
+        <h3>Slot 5</h3>
+        <div class="slot">
+          <label for="pkmn5">Name: </label>
+          <input id="pkmn5Field" type="text" name="pkmn5"/>         
+          <br>
+          <label for="move5_1">Move 1: </label>
+          <input id="move5_1Field" type="text" name="move5_1"/>           
+          <label for="move5_2">Move 2: </label>
+          <input id="move5_2Field" type="text" name="move5_2"/>     <br>  
+          <label for="move5_3">Move 3: </label>
+          <input id="move5_3Field" type="text" name="move5_3"/>           
+          <label for="move5_4">Move 4: </label>
+          <input id="move5_4Field" type="text" name="move5_4"/>  
+        </div>
+        
+        <h3>Slot 6</h3>
+        <div class="slot">
+          <label for="pkmn6">Name: </label>
+          <input id="pkmn6Field" type="text" name="pkmn1"/>         
+          <br>
+          <label for="move6_1">Move 1: </label>
+          <input id="move6_1Field" type="text" name="move6_1"/>           
+          <label for="move6_2">Move 2: </label>
+          <input id="move6_2Field" type="text" name="move6_2"/>     <br>  
+          <label for="move6_3">Move 3: </label>
+          <input id="move6_3Field" type="text" name="move6_3"/>           
+          <label for="move6_4">Move 4: </label>
+          <input id="move6_4Field" type="text" name="move6_4"/>  
+        </div>
+        
+        <label for="desc"><h3>Description: </h3></label>
+        <input id="descField" type="text" name="desc"/>         
+        <br><br>
+        
+        <input type="submit" value="Add Team" />
+      </form>
+      
+      
+    </section>
+    
+    <hr> 
+    
+    <section id="pokemonSelector">
+      <p>[select pokemon?] *maybe an option to select pokemon/moves instead of entering them?</p>
+    </section>
+    
+    <hr>
+    
+    <section id="allTeams">
+      <input id="refreshButton" type="button" value="refresh" />
+      <p>*for now, refresh button recieves object with current saved teams and shows in console for now</p>
+      <br/>
+      <p>[placeholder list] *will generate list based on server data</p>
+      
+      <ul>
+        <li><a href="">[placeholder] *will load selected team data</a></li>
+      </ul>
+    </section>
+    
+    <section id="top" style="display: none">
+      <form id="nameForm" action="/addUser" method="post">
+        <label for="name">Name: </label>
+        <input id="nameField" type="text" name="name" />
+        <label for="age">Age: </label>
+        <input id="ageField" type="number" name="age" min="0" max="100" step="1"/>
+        <input type="submit" value="Add User" />
+      </form>
+      
+      <form id="userForm" action="/getUsers" method="get">
+        <select id='urlField'>
+          <option value='/getUsers'>/getUsers</option>
+          <option value='/notReal'>/notReal</option>
+        </select>
+        <select id="methodSelect">
+          <option value="get">GET</option>
+          <option value="head">HEAD</option>
+        </select>
+        <input type="submit" value="Get User" />
+      </form>
+    </section>
+    
+  </section>
+</body>
+</html>
