@@ -1,10 +1,10 @@
 const crypto = require('crypto');
 
-const users = {};
 const teams = {};
 
-teams.cynthia = {
+teams.Cynthia = {
   teamName: 'Cynthia',
+  teamDesc: 'Champion Cynthia\'s team',
   pkmn1: 'Spiritomb',
   move1_1: 'Dark Pulse',
   move1_2: 'Psychic',
@@ -71,6 +71,7 @@ const respondJSONMeta = (request, response, status) => {
 const getTeams = (request, response) => {
   const responseJSON = {
     teams,
+    message: 'updatedList',
   };
 
   if (request.headers['if-none-match'] === digest) {
@@ -93,25 +94,35 @@ const addTeam = (request, response, body) => {
   // console.dir(body);
 
   const responseJSON = {
-    message: '.........',
+    message: 'Missing Parameters',
   };
 
   // TODO: add more checks ()for now just need one pokemon with one move
   let missingParams = false;
-  if (body.pkmn1 === '') {
+  if (body.teamName === '') {
     missingParams = true;
+    responseJSON.message = 'Missing team name';
+  } else if (body.pkmn1 === '') {
+    missingParams = true;
+    responseJSON.message = 'There is no Pokemon in slot 1';
   } else if (body.move1_1 === '') {
     missingParams = true;
+    responseJSON.message = 'Missing first move on slot 1 Pokemon';
   } else if (!body.pkmn2 === '' && body.move2_1 === '') {
     missingParams = true;
+    responseJSON.message = 'Missing first move on slot 2 Pokemon';
   } else if (!body.pkmn3 === '' && body.move3_1 === '') {
     missingParams = true;
+    responseJSON.message = 'Missing first move on slot 3 Pokemon';
   } else if (!body.pkmn4 === '' && body.move4_1 === '') {
     missingParams = true;
+    responseJSON.message = 'Missing first move on slot 4 Pokemon';
   } else if (!body.pkmn5 === '' && body.move5_1 === '') {
     missingParams = true;
+    responseJSON.message = 'Missing first move on slot 5 Pokemon';
   } else if (!body.pkmn6 === '' && body.move6_1 === '') {
     missingParams = true;
+    responseJSON.message = 'Missing first move on slot 6 Pokemon';
   }
   if (missingParams === true) {
     responseJSON.id = 'missingParams'; // error id
@@ -140,60 +151,6 @@ const addTeam = (request, response, body) => {
   return respondJSON(request, response, responseCode, responseJSON);
 };
 
-// TODO remove old code vv
-const getUsers = (request, response) => {
-  const responseJSON = {
-    users,
-  };
-
-  if (request.headers['if-none-match'] === digest) {
-    return respondJSONMeta(request, response, 304);
-  }
-
-  return respondJSON(request, response, 200, responseJSON);
-};
-
-const getUsersMeta = (request, response) => {
-  if (request.headers['if-none-match'] === digest) {
-    return respondJSONMeta(request, response, 304);
-  }
-
-  return respondJSONMeta(request, response, 200);
-};
-
-const addUser = (request, response, body) => {
-  console.dir(body);
-
-  const responseJSON = {
-    message: 'Name and age are both required.',
-  };
-
-  if (!body.name || !body.age) {
-    responseJSON.id = 'missingParams'; // error id
-    return respondJSON(request, response, 400, responseJSON);
-  }
-
-  let responseCode = 201;
-
-  if (users[body.name]) {
-    responseCode = 204;
-    console.log('update user');
-    responseJSON.message = 'Updated successfully';
-  } else {
-    users[body.name] = {};
-    console.log('add user');
-    responseJSON.message = 'Created successfully';
-  }
-
-  users[body.name].name = body.name;
-  users[body.name].age = body.age;
-
-  etag = crypto.createHash('sha1').update(JSON.stringify(users));
-  digest = etag.digest('hex');
-
-  return respondJSON(request, response, responseCode, responseJSON);
-};
-
 const notFound = (request, response) => {
   const responseJSON = {
     message: 'The page you are looking for was not found.',
@@ -208,9 +165,6 @@ const notFoundMeta = (request, response) => {
 };
 
 module.exports = {
-  getUsers,
-  addUser,
-  getUsersMeta,
   notFound,
   notFoundMeta,
   addTeam,

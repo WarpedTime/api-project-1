@@ -8,28 +8,7 @@ const port = process.env.PORT || process.env.NODE_PORT || 3000;
 
 // todo remove old code vv
 const handlePost = (request, response, parsedUrl) => {
-  if (parsedUrl.pathname === '/addUser') {
-    const res = response;
-
-    const body = [];
-
-    request.on('error', (err) => {
-      console.dir(err);
-      res.statusCode = 400;
-      res.end();
-    });
-
-    request.on('data', (chunk) => {
-      body.push(chunk);
-    });
-
-    request.on('end', () => {
-      const bodyString = Buffer.concat(body).toString(); // utf8 is default
-      const bodyParams = query.parse(bodyString);
-
-      jsonHandler.addUser(request, res, bodyParams);
-    });
-  } else if (parsedUrl.pathname === '/addTeam') {
+  if (parsedUrl.pathname === '/addTeam') {
     const res = response;
 
     const body = [];
@@ -58,10 +37,10 @@ const handleGet = (request, response, parsedUrl) => {
     htmlHandler.getIndex(request, response);
   } else if (parsedUrl.pathname === '/style.css') {
     htmlHandler.getCSS(request, response);
+  } else if (parsedUrl.pathname === '/getPokemon') {
+    htmlHandler.getJSON(request, response);
   } else if (parsedUrl.pathname === '/bundle.js') {
     htmlHandler.getBundle(request, response);
-  } else if (parsedUrl.pathname === '/getUsers') {
-    jsonHandler.getUsers(request, response);
   } else if (parsedUrl.pathname === '/getTeams') {
     jsonHandler.getTeams(request, response);
   } else {
@@ -69,19 +48,15 @@ const handleGet = (request, response, parsedUrl) => {
   }
 };
 
-const handleHead = (request, response, parsedUrl) => {
-  if (parsedUrl.pathname === '/getUsers') {
-    jsonHandler.getUsersMeta(request, response);
-  } else {
-    jsonHandler.notFoundMeta(request, response);
-  }
+const handleHead = (request, response) => {
+  jsonHandler.notFoundMeta(request, response);
 };
 
 const onRequest = (request, response) => {
   const parsedUrl = url.parse(request.url);
 
   if (request.method === 'HEAD') {
-    handleHead(request, response, parsedUrl);
+    handleHead(request, response);
   } else if (request.method === 'GET') {
     handleGet(request, response, parsedUrl);
   } else if (request.method === 'POST') {
